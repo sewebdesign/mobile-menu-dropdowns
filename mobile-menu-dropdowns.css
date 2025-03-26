@@ -93,7 +93,7 @@
 /*Sub Item font size*/
 #header .cse-dropdown-content .header-menu-nav-item a {
   font-size: var(--subnavfontsize)!important;
-  padding-left: var(--subnavindent);
+  padding-left: var(--subnavindent)!important;
 }
 
 #header .cse-dropdown-trigger .header-dropdown-icon {
