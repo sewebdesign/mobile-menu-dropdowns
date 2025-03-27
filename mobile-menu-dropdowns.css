@@ -109,6 +109,8 @@
 #header .cse-dropdown-trigger .header-dropdown-icon svg {
   transform: rotate(0deg);
   stroke-width: var(--arrowstrokewidth);
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 #header .cse-dropdown-trigger.open .header-dropdown-icon svg {
