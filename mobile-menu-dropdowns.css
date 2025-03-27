@@ -2,12 +2,12 @@
   --vertcentered: var(--true);
   --spaceabovenav: 0px;
   --spacebelownav: 0px;
-  --navfontsize: 8.5vmin;
-  --spacebetweennavitems: 3vw;
-  --subnavfontsize: 8.5vmin;
-  --spacebetweensubnavitems: 3vw;
-  --spaceabovesubnav: 3vw;
-  --spacebelowsubnav: 3vw;
+  --navfontsize: 8vmin;
+  --spacebetweennavitems: .3em;
+  --subnavfontsize: 8vmin;
+  --spacebetweensubnavitems: .3em;
+  --spaceabovesubnav: .3em;
+  --spacebelowsubnav: .3em;
   --subnavindent: 0px;
   --arrowsize: 1em;
   --arrowstrokewidth: 1px;
@@ -56,17 +56,17 @@
   display: block;
 }
 #header .cse-dropdown-content .header-menu-nav-item a  {
-  margin-block: var(--spacebetweensubnavitems);
+  margin-block: var(--spacebetweensubnavitems)!important;
 }
 
 #header .cse-dropdown-content .header-menu-controls + .header-menu-nav-item {
-  margin-top: var(--spaceabovesubnav);
+  margin-top: var(--spaceabovesubnav)!important;
 }
 #header .cse-dropdown-content .header-menu-controls + .header-menu-nav-item a {
   margin-top: 0;
 }
 #header .cse-dropdown-content .header-menu-nav-item:last-child {
-  margin-bottom: var(--spacebelowsubnav);
+  margin-bottom: var(--spacebelowsubnav)!important;
 }
 #header .cse-dropdown-content .header-menu-nav-item:last-child a {
   margin-bottom: 0;
@@ -88,7 +88,7 @@
 /*Main nav font size*/
 #header .header-menu-nav-item a {
     font-size: var(--navfontsize)!important;
-  margin-block: var(--spacebetweennavitems);
+  margin-block: var(--spacebetweennavitems)!important;
 }
 /*Sub Item font size*/
 #header .cse-dropdown-content .header-menu-nav-item a {
