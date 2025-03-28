@@ -2,7 +2,7 @@ function mobileMenuDropdown(options = {}) {
   // Convert string "true"/"false" to boolean if needed
   const closeOthers = options.closeOthers === "true" || options.closeOthers === true;
   
- // Wait for DOM to be fully loaded
+  // Wait for DOM to be fully loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       // Add extra delay after DOM is loaded
@@ -15,8 +15,8 @@ function mobileMenuDropdown(options = {}) {
 }
 
 function initDropdowns(closeOthers) {
-  // Get all folder link elements
-  const folderLinks = document.querySelectorAll('.header-menu-nav-item a[data-folder-id]');
+  // Get all folder link elements (including language picker)
+  const folderLinks = document.querySelectorAll('.header-menu-nav-item a[data-folder-id], .language-picker-mobile a[data-folder-id]');
   
   // Loop through each folder link
   folderLinks.forEach(folderLink => {
@@ -27,7 +27,13 @@ function initDropdowns(closeOthers) {
     const folderIdName = folderLink.getAttribute('data-folder-id');
     
     // Find the corresponding folder element
-    const folderElement = document.querySelector('[data-folder="' + folderIdName + '"]');
+    // For regular menu items
+    let folderElement = document.querySelector('[data-folder="' + folderIdName + '"]');
+    
+    // For language picker (it uses id instead of data-folder attribute)
+    if (!folderElement && folderIdName === "language-picker") {
+      folderElement = document.getElementById('multilingual-language-picker-mobile');
+    }
     
     // Only proceed if we found a corresponding folder element
     if (folderElement) {
