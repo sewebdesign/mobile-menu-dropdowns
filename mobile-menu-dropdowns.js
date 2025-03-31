@@ -1,20 +1,22 @@
 function mobileMenuDropdown(options = {}) {
   // Convert string "true"/"false" to boolean if needed
   const closeOthers = options.closeOthers === "true" || options.closeOthers === true;
+  // Get icon type (default to "arrow" if not specified or if set to "arrow")
+  const iconType = options.icon === "plus" ? "plus" : "arrow";
   
   // Wait for DOM to be fully loaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       // Add extra delay after DOM is loaded
-      setTimeout(() => initDropdowns(closeOthers), 500);
+      setTimeout(() => initDropdowns(closeOthers, iconType), 500);
     });
   } else {
     // DOM is already loaded, but still add the delay
-    setTimeout(() => initDropdowns(closeOthers), 500);
+    setTimeout(() => initDropdowns(closeOthers, iconType), 500);
   }
 }
 
-function initDropdowns(closeOthers) {
+function initDropdowns(closeOthers, iconType) {
   // Get all folder link elements (including language picker)
   const folderLinks = document.querySelectorAll('.header-menu-nav-item a[data-folder-id], .language-picker-mobile a[data-folder-id]');
   
@@ -22,6 +24,12 @@ function initDropdowns(closeOthers) {
   folderLinks.forEach(folderLink => {
     folderLink.classList.add('cse-dropdown-trigger');
     folderLink.setAttribute('tabindex', '0');
+    
+    // Set the icon href based on the iconType
+    const iconElement = folderLink.querySelector('.header-dropdown-icon svg use');
+    if (iconElement && iconType === "plus") {
+      iconElement.setAttribute('href', '#plus');
+    }
     
     // Extract the folder ID from the link
     const folderIdName = folderLink.getAttribute('data-folder-id');
