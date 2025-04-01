@@ -86,7 +86,8 @@
 .cse-dropdown-trigger {
   cursor: pointer;
   z-index: 2;
-  width: calc(100% - 10vw);
+  width: 100%;
+  box-sizing: border-box;
 }
 .cse-dropdown-trigger > div {
   width: 100%;
