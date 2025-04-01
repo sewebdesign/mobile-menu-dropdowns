@@ -8,6 +8,7 @@
   --spacebetweensubnavitems: .3em;
   --spaceabovesubnav: .3em;
   --spacebelowsubnav: .3em;
+  --subnavcolor: var(--menuOverlayNavigationLinkColor);
   --subnavindent: 0px;
   --arrowsize: 1em;
   --arrowstrokewidth: 1px;
@@ -57,6 +58,7 @@
 }
 #header .cse-dropdown-content .header-menu-nav-item a  {
   margin-block: var(--spacebetweensubnavitems)!important;
+  color: var(--subnavcolor);
 }
 
 #header .cse-dropdown-content .header-menu-controls + .header-menu-nav-item {
