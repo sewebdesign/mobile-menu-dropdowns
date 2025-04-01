@@ -111,6 +111,8 @@
   height: var(--arrowsize)!important;
   transform: translateY(var(--arrowtopposition));
   margin-left: var(--arrowspaceleft)!important;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 #header .cse-dropdown-trigger.open .header-dropdown-icon {
   transform: translateY(0);
