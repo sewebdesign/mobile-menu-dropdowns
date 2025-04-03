@@ -26,6 +26,12 @@
   flex-grow: var(--vertcentered);
   margin-bottom: var(--spacebelownav)!important;
 }
+#header .header-menu-nav-item {
+    overflow: hidden;
+}
+#header .header-menu-nav-item a {
+    display: block;
+}
 #header .cse-dropdown-content {
   display: grid;
   grid-template-rows: 0fr;
@@ -86,8 +92,6 @@
 .cse-dropdown-trigger {
   cursor: pointer;
   z-index: 2;
-  width: 100%;
-  box-sizing: border-box;
 }
 .cse-dropdown-trigger > div {
   width: 100%;
