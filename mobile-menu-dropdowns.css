@@ -133,7 +133,7 @@
   transform: rotate(180deg);
 }
 
-/* Multilingual Mobile Styling */
+/* Weglot Multilingual Mobile Styling */
 #header .language-picker-mobile {
     flex-direction: column;
     align-items: flex-start;
@@ -149,6 +149,11 @@
 }
 .header-overlay-alignment-right #header .language-picker-mobile .current-language {
     justify-content: flex-end;
+}
+
+/* Brad Good Multilingual Fix */
+.header-menu-nav-folder[data-folder="root"] ~ [data-folder] {
+  display: none!important;
 }
 
 /* Hamburger Menu Plugin Fixes */
