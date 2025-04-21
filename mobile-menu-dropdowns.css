@@ -152,7 +152,7 @@
 }
 
 /* Brad Good Multilingual Fix */
-.header-menu-nav-folder[data-folder="root"] ~ [data-folder] {
+.multilanguage[data-folder="root"] ~ [data-folder] {
   display: none!important;
 }
 
