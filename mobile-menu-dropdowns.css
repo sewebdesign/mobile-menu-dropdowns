@@ -118,7 +118,7 @@
 }
 
 /*Main nav font size*/
-#header .header-menu-nav-item a {
+#header .header-menu-nav-item a, #header .header-menu .language-picker {
   font-size: var(--navfontsize) !important;
   margin-block: var(--spacebetweennavitems) !important
 }
