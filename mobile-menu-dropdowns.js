@@ -1,82 +1,115 @@
-function mobileMenuDropdown(options = {}) {
-  // Convert string "true"/"false" to boolean if needed
-  const closeOthers = options.closeOthers === "true" || options.closeOthers === true;
-  // Get icon type (default to "arrow" if not specified or if set to "arrow")
-  const iconType = options.icon === "plus" ? "plus" : "arrow";
-  
-  // Wait for DOM to be fully loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      // Add extra delay after DOM is loaded
-      setTimeout(() => initDropdowns(closeOthers, iconType), 500);
+function mobileMenuDropdown(e = {}) {
+  var closeOthers = e.closeOthers === "true" || e.closeOthers === true;
+  var icon = e.icon === "plus" ? "plus" : "arrow";
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        initDropdowns(closeOthers, icon);
+      }, 500);
     });
   } else {
-    // DOM is already loaded, but still add the delay
-    setTimeout(() => initDropdowns(closeOthers, iconType), 500);
+    setTimeout(function() {
+      initDropdowns(closeOthers, icon);
+    }, 500);
   }
 }
 
-function initDropdowns(closeOthers, iconType) {
-  // Get all folder link elements (including language picker)
-  const folderLinks = document.querySelectorAll('.header-menu-nav-item a[data-folder-id], .language-picker-mobile a[data-folder-id]');
-  
-  // Loop through each folder link
-  folderLinks.forEach(folderLink => {
-    folderLink.classList.add('cse-dropdown-trigger');
-    folderLink.setAttribute('tabindex', '0');
-    
-    // Set the icon href based on the iconType
-    const iconElement = folderLink.querySelector('.header-dropdown-icon svg use');
-    if (iconElement && iconType === "plus") {
-      iconElement.setAttribute('href', '#plus');
+function initDropdowns(closeOthers, icon) {
+  var allTriggers = [];
+
+  function isAncestorTrigger(potentialAncestor, trigger) {
+    var parent = trigger.parentElement;
+    while (parent) {
+      if (parent.previousElementSibling === potentialAncestor) {
+        return true;
+      }
+      parent = parent.parentElement;
     }
-    
-    // Extract the folder ID from the link
-    const folderIdName = folderLink.getAttribute('data-folder-id');
-    
-    // Find the corresponding folder element
-    // For regular menu items
-    let folderElement = document.querySelector('[data-folder="' + folderIdName + '"]');
-    
-    // For language picker (it uses id instead of data-folder attribute)
-    if (!folderElement && folderIdName === "language-picker") {
-      folderElement = document.getElementById('multilingual-language-picker-mobile');
+    return false;
+  }
+
+  function setupTrigger(trigger, content) {
+    trigger.classList.add("cse-dropdown-trigger");
+    trigger.setAttribute("tabindex", "0");
+
+    var useEl = trigger.querySelector(".header-dropdown-icon svg use");
+    if (useEl && icon === "plus") {
+      useEl.setAttribute("href", "#plus");
     }
-    
-    // Only proceed if we found a corresponding folder element
-    if (folderElement) {
-      folderElement.classList.add('cse-dropdown-content');
-      
-      // Insert the folder element after the folder link
-      folderLink.after(folderElement);
-      
-      // Add click event listener to the folder link
-      folderLink.addEventListener('click', function(event) {
-        // Prevent the default behavior of the link
-        event.preventDefault();
-        
-        // If closeOthers option is enabled, close all other dropdowns
-        if (closeOthers) {
-          folderLinks.forEach(link => {
-            if (link !== folderLink) {
-              link.classList.remove('open');
+
+    content.classList.add("cse-dropdown-content");
+    allTriggers.push(trigger);
+
+    trigger.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (closeOthers) {
+        allTriggers.forEach(function(otherTrigger) {
+          if (otherTrigger !== trigger && !isAncestorTrigger(otherTrigger, trigger)) {
+            otherTrigger.classList.remove("open");
+          }
+        });
+      }
+      trigger.classList.toggle("open");
+    });
+  }
+
+  var folderTriggers = document.querySelectorAll(".header-menu-nav-item a[data-folder-id], .language-picker-mobile a[data-folder-id]");
+
+  folderTriggers.forEach(function(trigger) {
+    var folderId = trigger.getAttribute("data-folder-id");
+    var folder = document.querySelector('[data-folder="' + folderId + '"]');
+
+    if (!folder && folderId === "language-picker") {
+      folder = document.getElementById("multilingual-language-picker-mobile");
+    }
+
+    if (folder) {
+      trigger.after(folder);
+      setupTrigger(trigger, folder);
+    }
+  });
+
+  var subFolders = document.querySelectorAll("[data-sub-folder]");
+
+  subFolders.forEach(function(subFolder) {
+    var subFolderId = subFolder.getAttribute("data-sub-folder");
+    var originalLink = document.querySelector('.header-menu-nav-item a[href="' + subFolderId + '"]');
+
+    if (originalLink) {
+      var parentItem = originalLink.closest(".header-menu-nav-item");
+
+      if (parentItem) {
+        var newTrigger = originalLink.cloneNode(true);
+
+        var existingIcon = newTrigger.querySelector(".header-dropdown-icon");
+        if (!existingIcon) {
+          var iconTemplate = document.querySelector(".header-dropdown-icon");
+          if (iconTemplate) {
+            var iconClone = iconTemplate.cloneNode(true);
+            var itemContent = newTrigger.querySelector(".header-menu-nav-item-content");
+            if (itemContent) {
+              itemContent.appendChild(iconClone);
+            } else {
+              newTrigger.appendChild(iconClone);
             }
-          });
+          }
         }
-        
-        // Toggle the 'open' class on the folder link
-        folderLink.classList.toggle('open');
-        
-        // Reset tabindex for all links
-        setTimeout(() => {
-          folderLinks.forEach(link => {
-            link.setAttribute('tabindex', '0');
-          });
-        }, 300);
-      });
+
+        parentItem.innerHTML = "";
+        parentItem.appendChild(newTrigger);
+        parentItem.appendChild(subFolder);
+
+        setupTrigger(newTrigger, subFolder);
+      }
     }
+  });
+
+  var activeSlides = document.querySelectorAll(".header-menu-nav-folder--active");
+  activeSlides.forEach(function(el) {
+    el.classList.remove("header-menu-nav-folder--active");
   });
 }
 
-// Make the plugin globally available
 window.mobileMenuDropdown = mobileMenuDropdown;
