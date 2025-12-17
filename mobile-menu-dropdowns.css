@@ -13,25 +13,31 @@
   --arrowsize: 1em;
   --arrowstrokewidth: 1px;
   --arrowtopposition: 0px;
-  --arrowspaceleft: .15em;
+  --arrowspaceleft: .15em
 }
+
 .header-menu {
   --true: 1;
-  --false: 0;
+  --false: 0
 }
+
 .header-menu-nav {
-  padding-top: var(--spaceabovenav);
+  padding-top: var(--spaceabovenav)
 }
-[data-folder="root"] > .header-menu-nav-folder-content {
+
+[data-folder=root] > .header-menu-nav-folder-content {
   flex-grow: var(--vertcentered);
-  margin-bottom: var(--spacebelownav)!important;
+  margin-bottom: var(--spacebelownav) !important
 }
+
 #header .header-menu-nav-item {
-    overflow: hidden;
+  overflow: hidden
 }
+
 #header .header-menu-nav-item a {
-    display: block;
+  display: block
 }
+
 #header .cse-dropdown-content {
   display: grid;
   grid-template-rows: 0fr;
@@ -39,129 +45,154 @@
   overflow: hidden;
   visibility: hidden;
   justify-content: unset;
-  transition: grid-template-rows 500ms, visibility 0s .5s;
+  transition: grid-template-rows .5s, visibility 0s .5s
 }
-#header [data-folder] {
-  transform: translateX(0)!important;
+
+#header [data-folder],
+#header [data-sub-folder] {
+  transform: translateX(0) !important
 }
+
 /* Dropdown Content Styling */
 #header .cse-dropdown-trigger.open + .cse-dropdown-content {
   grid-template-rows: 1fr;
   visibility: visible;
-  transition: grid-template-rows .5s, visibility 0s;
+  transition: grid-template-rows .5s, visibility 0s
 }
 
 #header .cse-dropdown-content .header-menu-nav-item {
-  padding-inline: 0;  
+  padding-inline: 0
 }
+
 .cse-dropdown-content .header-menu-controls {
-  display: none!important;
+  display: none !important
 }
 
 #header .cse-dropdown-content > div {
   overflow: hidden;
-  display: block;
+  display: block
 }
-#header .cse-dropdown-content .header-menu-nav-item a  {
-  margin-block: var(--spacebetweensubnavitems)!important;
-  color: var(--subnavcolor);
+
+#header .cse-dropdown-content .header-menu-nav-item a {
+  margin-block: var(--spacebetweensubnavitems) !important;
+  color: var(--subnavcolor)
 }
 
 #header .cse-dropdown-content .header-menu-controls + .header-menu-nav-item {
-  margin-top: var(--spaceabovesubnav)!important;
+  margin-top: var(--spaceabovesubnav) !important
 }
+
 #header .cse-dropdown-content .header-menu-controls + .header-menu-nav-item a {
-  margin-top: 0;
+  margin-top: 0
 }
+
 #header .cse-dropdown-content .header-menu-nav-item:last-child {
-  margin-bottom: var(--spacebelowsubnav)!important;
+  margin-bottom: var(--spacebelowsubnav) !important
 }
+
 #header .cse-dropdown-content .header-menu-nav-item:last-child a {
-  margin-bottom: 0;
+  margin-bottom: 0
 }
 
 /* Right align Triggers */
 .header-overlay-alignment-right #header .cse-dropdown-trigger .header-menu-nav-item-content {
-  justify-content: flex-end;
+  justify-content: flex-end
 }
+
 .header-overlay-alignment-right #header .cse-dropdown-content .header-menu-nav-item a {
-    padding-right: var(--subnavindent) !important;
+  padding-right: var(--subnavindent) !important
 }
 
 /* Nav trigger Styling */
 .cse-dropdown-trigger {
   cursor: pointer;
-  z-index: 2;
+  z-index: 2
 }
+
 .cse-dropdown-trigger > div {
-  width: 100%;
+  width: 100%
 }
+
 .header-overlay-alignment-center .cse-dropdown-trigger > div {
-  justify-content: center;
+  justify-content: center
 }
+
 /*Main nav font size*/
 #header .header-menu-nav-item a {
-    font-size: var(--navfontsize)!important;
-  margin-block: var(--spacebetweennavitems)!important;
+  font-size: var(--navfontsize) !important;
+  margin-block: var(--spacebetweennavitems) !important
 }
 /*Sub Item font size*/
 #header .cse-dropdown-content .header-menu-nav-item a {
-  font-size: var(--subnavfontsize)!important;
-  padding-left: var(--subnavindent)!important;
+  font-size: var(--subnavfontsize) !important;
+  padding-left: var(--subnavindent) !important
+}
+
+#header .cse-dropdown-content .cse-dropdown-content .header-menu-nav-item a {
+  padding-left: calc(var(--subnavindent) * 2) !important
+}
+
+#header .cse-dropdown-content .cse-dropdown-content .cse-dropdown-content .header-menu-nav-item a {
+  padding-left: calc(var(--subnavindent) * 3) !important
 }
 
 #header .cse-dropdown-trigger .header-dropdown-icon {
-  transform: rotate(0deg);
-  width: var(--arrowsize)!important;
-  height: var(--arrowsize)!important;
+  width: var(--arrowsize) !important;
+  height: var(--arrowsize) !important;
   transform: translateY(var(--arrowtopposition));
-  margin-left: var(--arrowspaceleft)!important;
+  margin-left: var(--arrowspaceleft) !important;
   flex-shrink: 0;
-  flex-grow: 0;
+  flex-grow: 0
 }
+
 #header .cse-dropdown-trigger.open .header-dropdown-icon {
-  transform: translateY(0);
+  transform: translateY(0)
 }
+
 #header .cse-dropdown-trigger .header-dropdown-icon svg {
-  transform: rotate(0deg);
+  transform: rotate(0);
   stroke-width: var(--arrowstrokewidth);
   fill: currentColor;
-  stroke: currentColor;
+  stroke: currentColor
 }
 
 #header .cse-dropdown-trigger.open .header-dropdown-icon svg {
-  transform: rotate(180deg);
+  transform: rotate(180deg)
 }
 
 /* Weglot Multilingual Mobile Styling */
 #header .language-picker-mobile {
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start
 }
+
 #header .language-picker-mobile .header-menu-nav-item a {
-  margin-inline: 8px!important;
+  margin-inline: 8px !important
 }
+
 .header-overlay-alignment-center #header .language-picker-mobile {
-    align-items: center;
+  align-items: center
 }
+
 .header-overlay-alignment-right #header .language-picker-mobile {
-    align-items: flex-end;
+  align-items: flex-end
 }
+
 .header-overlay-alignment-right #header .language-picker-mobile .current-language {
-    justify-content: flex-end;
+  justify-content: flex-end
 }
 
 /* Brad Good Multilingual Fix */
-.multilanguage[data-folder="root"] ~ [data-folder] {
-  display: none!important;
+.multilanguage[data-folder=root] ~ [data-folder] {
+  display: none !important
 }
 
 /* Hamburger Menu Plugin Fixes */
 #header .cse-dropdown-content .header-menu-nav-item {
-  padding: 0!important;
+  padding: 0 !important
 }
 
 #header .cse-dropdown-content .header-menu-nav-folder-content {
-  margin-top: 0px;
-  margin-bottom: 0px;
-} 
+  margin-top: 0;
+  margin-bottom: 0
+}
